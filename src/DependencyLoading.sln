@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyLoading", "Ninject.Extensions.DependencyLoading\Ninject.Extensions.DependencyLoading.csproj", "{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyLoading.Test", "Ninject.Extensions.DependencyLoading.Test\Ninject.Extensions.DependencyLoading.Test.csproj", "{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}.Debug|x86.Build.0 = Debug|Any CPU
+		{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}.Release|x86.Build.0 = Release|Any CPU
+		{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}.Debug|x86.Build.0 = Debug|Any CPU
+		{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}.Release|x86.ActiveCfg = Release|Any CPU
+		{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Ninject.Extensions.DependencyLoading\Ninject.Extensions.DependencyLoading.csproj
+	EndGlobalSection
+EndGlobal

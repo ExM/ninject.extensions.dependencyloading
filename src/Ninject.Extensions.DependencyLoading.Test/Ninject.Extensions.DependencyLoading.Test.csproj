@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C991C0B9-D91A-4015-B9B7-89C2FF7F9CF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ninject.Extensions.DependencyLoading.Test</RootNamespace>
+    <AssemblyName>Ninject.Extensions.DependencyLoading.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+    </Reference>
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Ninject-2.2.0.0-release-mono-2.0\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.9.10348, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NUnit-2.5.9.10348\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="TypeDependencyDetectorTest.cs" />
+    <Compile Include="Types\TestConsumer.cs" />
+    <Compile Include="Types\TestProvider.cs" />
+    <Compile Include="Types\TestExportAttribute.cs" />
+    <Compile Include="Types\ITestModule.cs" />
+    <Compile Include="Types\IServiceA.cs" />
+    <Compile Include="Types\IServiceB.cs" />
+    <Compile Include="Types\ServiceARealization.cs" />
+    <Compile Include="Types\ServiceBRealization.cs" />
+    <Compile Include="Types\IServiceC.cs" />
+    <Compile Include="Types\ServiceCRealization.cs" />
+    <Compile Include="CreateInstanceTest.cs" />
+    <Compile Include="TopologicalSortTest.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Ninject.Extensions.DependencyLoading\Ninject.Extensions.DependencyLoading.csproj">
+      <Project>{0D6F24EF-E48D-48DE-8BC3-9E19EDCF4DBD}</Project>
+      <Name>Ninject.Extensions.DependencyLoading</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Types\" />
+  </ItemGroup>
+</Project>
