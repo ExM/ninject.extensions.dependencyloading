@@ -9,8 +9,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("@LGPLv3 Copyright © 2010 (git://github.com/ExM/ninject.extensions.dependencyloading.git)")]
+[assembly: AssemblyTrademark("Explorer Machine")]
 [assembly: AssemblyCulture("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
