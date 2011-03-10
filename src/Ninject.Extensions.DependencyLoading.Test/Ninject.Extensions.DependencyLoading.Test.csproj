@@ -58,6 +58,21 @@
     <Compile Include="Types\ServiceCRealization.cs" />
     <Compile Include="CreateInstanceTest.cs" />
     <Compile Include="TopologicalSortTest.cs" />
+    <Compile Include="Types\ManyModules\MA.cs" />
+    <Compile Include="Types\ManyServices\IServA.cs" />
+    <Compile Include="Types\ManyModules\MB.cs" />
+    <Compile Include="Types\ManyModules\MC.cs" />
+    <Compile Include="Types\ManyModules\MD.cs" />
+    <Compile Include="Types\ManyModules\ME.cs" />
+    <Compile Include="Types\ManyModules\MF.cs" />
+    <Compile Include="Types\ManyModules\MG.cs" />
+    <Compile Include="Types\ManyServices\IServB.cs" />
+    <Compile Include="Types\ManyServices\IServC.cs" />
+    <Compile Include="Types\ManyServices\IServD.cs" />
+    <Compile Include="Types\ManyServices\IServE.cs" />
+    <Compile Include="Types\ManyServices\IServF.cs" />
+    <Compile Include="Types\ManyServices\IServG.cs" />
+    <Compile Include="Types\ManyServices\IServH.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -68,5 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Types\" />
+    <Folder Include="Types\ManyModules\" />
+    <Folder Include="Types\ManyServices\" />
   </ItemGroup>
 </Project>

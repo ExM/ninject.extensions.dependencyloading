@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="CycleDetectException.cs" />
-    <Compile Include="DependencyDetectorCache.cs" />
     <Compile Include="InjectIdentity.cs" />
     <Compile Include="ModuleLoaderExtensions.cs" />
     <Compile Include="TypeDependencyDetector.cs" />

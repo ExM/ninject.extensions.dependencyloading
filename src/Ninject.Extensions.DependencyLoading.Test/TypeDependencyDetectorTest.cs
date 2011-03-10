@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection;
 using Ninject.Extensions.DependencyLoading;
+using t;
 
 namespace DependencyLoadingTest
 {
@@ -74,6 +75,19 @@ namespace DependencyLoadingTest
 			
 			Assert.IsFalse(TypeDependencyDetector<TestExportAttribute>
 				.IsDependency(typeof(TestProvider), typeof(TestConsumer)));
+		}
+		
+		[TestCase(typeof(MG), typeof(MF),true)]
+		[TestCase(typeof(MG), typeof(ME),true)]
+		[TestCase(typeof(MF), typeof(MB),true)]
+		[TestCase(typeof(MC), typeof(ME),false)]
+		[TestCase(typeof(MC), typeof(MD),false)]
+		[TestCase(typeof(MD), typeof(MC),false)]
+		[TestCase(typeof(MA), typeof(MG),false)]
+		public void Dependency(Type cons, Type prov, bool dep)
+		{
+			Assert.AreEqual(dep, TypeDependencyDetector<TestExportAttribute>
+				.IsDependency(cons, prov));
 		}
 	}
 }

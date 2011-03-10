@@ -77,6 +77,27 @@ namespace DependencyLoadingTest
 			Assert.AreEqual(1, sorted[2]);
 		}
 		
+		[Test]
+		public void ManyDependency()
+		{
+			List<string> list = new List<string>(new string[]{
+				"A", "B", "C", "D", "E", "F", "G"
+			});
+			
+			List<string> dep = new List<string>(new string[]{
+				"AB", "AC", "DB", "DE", "CF", "BF", "FG", "EG"
+			});
+			
+			Func<string, string, bool> isDependency = (s1, s2) => 
+			{
+				return dep.Contains(s1 + s2);
+			};
+			
+			List<string> sorted = list.TopologicalSort(isDependency);
+			
+			Assert.AreEqual("G", sorted[0]);
+		}
+		
 		[TestCase(1,2,3,4)]
 		[TestCase(4,3,2,1)]
 		[TestCase(1,4,3,2)]

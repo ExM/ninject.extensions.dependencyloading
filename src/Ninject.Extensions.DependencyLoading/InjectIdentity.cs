@@ -39,21 +39,22 @@ namespace Ninject.Extensions.DependencyLoading
 		
 		public bool Equals(InjectIdentity other)
 		{
-			return Name == other.Name && Type != other.Type;
+			return other != null && Name == other.Name && Type == other.Type;
 		}
 		
 		public override bool Equals (object obj)
 		{
-			InjectIdentity other = obj as InjectIdentity;
-			if(other == null)
-				return false;
-			else
-				return Equals(other);
+			return Equals(obj as InjectIdentity);
 		}
 		
 		public override int GetHashCode()
 		{
 			return Name.GetHashCode() ^ Type.GetHashCode();
+		}
+		
+		public override string ToString ()
+		{
+			return string.Format ("[InjectIdentity: Name={0}, Type={1}]", Name, Type);
 		}
 	}
 }

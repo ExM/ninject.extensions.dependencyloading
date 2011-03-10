@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Ninject.Extensions.DependencyLoading;
 using Ninject;
+using t;
 
 namespace DependencyLoadingTest
 {
@@ -18,12 +19,29 @@ namespace DependencyLoadingTest
 			
 			List<ITestModule> modules = kernel.LoadModules<ITestModule, TestExportAttribute>(
 				(module) => {module.Initialize();},
-				
 				typeof(TestConsumer),
 				typeof(TestProvider));
 			
 			Assert.IsInstanceOf<TestProvider>(modules[0]);
 			Assert.IsInstanceOf<TestConsumer>(modules[1]);
+		}
+		
+		[Test]
+		public void Many()
+		{
+			IKernel kernel = new StandardKernel();
+			
+			List<ITestModule> modules = kernel.LoadModules<ITestModule, TestExportAttribute>(
+				(module) => {module.Initialize();},
+				typeof(MG),
+				typeof(MF),
+				typeof(ME),
+				typeof(MD),
+				typeof(MC),
+				typeof(MB),
+				typeof(MA));
+			
+			Assert.IsInstanceOf<MG>(modules[6]);
 		}
 		
 		[Test]

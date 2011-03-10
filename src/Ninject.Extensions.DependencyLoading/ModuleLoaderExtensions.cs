@@ -12,10 +12,7 @@ namespace Ninject.Extensions.DependencyLoading
 			where A: Attribute
 		{
 			List<T> result = new List<T>();
-			DependencyDetectorCache<Type> depCache =
-				new DependencyDetectorCache<Type>(TypeDependencyDetector<A>.IsDependency);
-			
-			List<Type> sorted = types.TopologicalSort(depCache.IsDependency, ShowType);
+			List<Type> sorted = types.TopologicalSort(TypeDependencyDetector<A>.IsDependency, ShowType);
 			
 			foreach(Type type in sorted)
 			{
