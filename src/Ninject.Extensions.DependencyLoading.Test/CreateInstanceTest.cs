@@ -52,7 +52,7 @@ namespace DependencyLoadingTest
 			TestProvider provider = new TestProvider();
 			provider.Initialize();
 			
-			kernel.ExportServices<TestExportAttribute>(provider);
+			kernel.ImportServices<TestExportAttribute>(provider);
 			
 			Assert.IsNotNull(kernel.Get<IServiceA>());
 			Assert.IsNotNull(kernel.Get<IServiceB>("Name_B1"));
@@ -68,7 +68,7 @@ namespace DependencyLoadingTest
 			TestProvider provider = new TestProvider();
 			provider.Initialize();
 			
-			kernel.ExportServices<TestExportAttribute>(provider);
+			kernel.ImportServices<TestExportAttribute>(provider);
 			
 			object obj = kernel.Get(typeof(TestConsumer));
 			Assert.IsNotNull(obj);

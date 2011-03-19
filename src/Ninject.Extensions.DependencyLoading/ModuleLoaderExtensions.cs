@@ -8,6 +8,24 @@ namespace Ninject.Extensions.DependencyLoading
 {
 	public static class ModuleLoaderExtensions
 	{
+		public static void LoadModules<T>(this IKernel kernel, IEnumerable<Type> modules,
+			Action<T> initialization, Action<List<Type>> warning, Action<List<Type>> error)
+		{
+			List<Type> sorted = new List<Type>();
+			List<Type> remain = new List<Type>();
+			
+			foreach(Type type in modules)
+			{
+				T module = (T)kernel.Get(type);
+				initialization(module);
+				
+				sorted.Add(type);
+			}
+			
+
+		}
+		
+		
 		public static List<T> LoadModules<T, A>(this IKernel kernel, Action<T> initialization, IEnumerable<Type> types)
 			where A: Attribute
 		{
@@ -19,7 +37,7 @@ namespace Ninject.Extensions.DependencyLoading
 				T module = (T)kernel.Get(type);
 				result.Add(module);
 				initialization(module);
-				kernel.ExportServices<A>(module);
+				kernel.ImportServices<A>(module);
 			}
 			
 			return result;
@@ -30,8 +48,10 @@ namespace Ninject.Extensions.DependencyLoading
 		{
 			return LoadModules<T, A>(kernel, initialization, types.Select((t) => {return t;}));
 		}
-		
-		public static void ExportServices<A>(this IKernel kernel, object module)
+		/// <summary>
+		/// imports all the properties of the module marked with an attribute of type A
+		/// </summary>
+		public static void ImportServices<A>(this IKernel kernel, object module)
 			where A: Attribute
 		{
 			Type type = module.GetType();
