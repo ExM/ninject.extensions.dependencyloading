@@ -52,27 +52,19 @@ namespace Ninject.Extensions.DependencyLoading
 			}
 		}
 		
-		public static List<T> LoadModules<T, A>(this IKernel kernel, Action<T> initialization, IEnumerable<Type> types)
+		public static List<Type> Sort<A>(this IEnumerable<Type> modules)
 			where A: Attribute
 		{
-			List<T> result = new List<T>();
-			List<Type> sorted = types.TopologicalSort(TypeDependencyDetector<A>.IsDependency, ShowType);
-			
-			foreach(Type type in sorted)
-			{
-				T module = (T)kernel.Get(type);
-				result.Add(module);
-				initialization(module);
-				kernel.ImportServices<A>(module);
-			}
-			
-			return result;
+			return modules.TopologicalSort(TypeDependencyDetector<A>.IsDependency, ShowType);
 		}
 		
-		public static List<T> LoadModules<T, A>(this IKernel kernel, Action<T> initialization, params Type[] types)
-			where A: Attribute
+		public static void LoadModules<T>(this IKernel kernel, IEnumerable<Type> modules, Action<T> initialization)
 		{
-			return LoadModules<T, A>(kernel, initialization, types.Select((t) => {return t;}));
+			foreach(Type type in modules)
+			{
+				T module = (T)kernel.Get(type);
+				initialization(module);
+			}
 		}
 		/// <summary>
 		/// imports all the properties of the module marked with an attribute of type A

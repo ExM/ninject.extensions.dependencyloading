@@ -10,38 +10,50 @@ using t;
 namespace DependencyLoadingTest
 {
 	[TestFixture]
-	public class CreateInstance
+	public class CreateInstanceTest
 	{
 		[Test]
 		public void Summary()
 		{
-			IKernel kernel = new StandardKernel();
-			
-			List<ITestModule> modules = kernel.LoadModules<ITestModule, TestExportAttribute>(
-				(module) => {module.Initialize();},
+			List<Type> modules = new List<Type>{
 				typeof(TestConsumer),
-				typeof(TestProvider));
+				typeof(TestProvider)};
 			
-			Assert.IsInstanceOf<TestProvider>(modules[0]);
-			Assert.IsInstanceOf<TestConsumer>(modules[1]);
+			List<Type> sorted = modules.Sort<TestExportAttribute>();
+			
+			Assert.AreEqual(typeof(TestProvider), sorted[0]);
+			Assert.AreEqual(typeof(TestConsumer), sorted[1]);
+			
+			IKernel kernel = new StandardKernel();
+			kernel.LoadModules<ITestModule>(sorted, (module) =>
+			{
+				module.Initialize();
+				kernel.ImportServices<TestExportAttribute>(module);
+			});
 		}
 		
 		[Test]
 		public void Many()
 		{
-			IKernel kernel = new StandardKernel();
-			
-			List<ITestModule> modules = kernel.LoadModules<ITestModule, TestExportAttribute>(
-				(module) => {module.Initialize();},
+			List<Type> modules = new List<Type>{
 				typeof(MG),
 				typeof(MF),
 				typeof(ME),
 				typeof(MD),
 				typeof(MC),
 				typeof(MB),
-				typeof(MA));
+				typeof(MA)};
 			
-			Assert.IsInstanceOf<MG>(modules[6]);
+			List<Type> sorted = modules.Sort<TestExportAttribute>();
+			
+			Assert.AreEqual(typeof(MG), sorted[6]);
+			
+			IKernel kernel = new StandardKernel();
+			kernel.LoadModules<ITestModule>(sorted, (module) =>
+			{
+				module.Initialize();
+				kernel.ImportServices<TestExportAttribute>(module);
+			});
 		}
 		
 		[Test]
