@@ -12,19 +12,45 @@ namespace Ninject.Extensions.DependencyLoading
 			Action<T> initialization, Action<List<Type>> warning, Action<List<Type>> error)
 		{
 			List<Type> sorted = new List<Type>();
-			List<Type> remain = new List<Type>();
+			List<Type> remain = modules.ToList();
+			List<Type> postponed = new List<Type>();
 			
-			foreach(Type type in modules)
+			bool isWarn = false;
+			while(true)
 			{
-				T module = (T)kernel.Get(type);
-				initialization(module);
+				foreach(Type type in remain)
+				{
+					object instance = (T)kernel.TryGet(type);
+					if(instance == null)
+					{
+						postponed.Add(type);
+						continue;
+					}
+					else
+					{
+						T module = (T)instance;
+						initialization(module);
+						sorted.Add(type);
+					}
+				}
 				
-				sorted.Add(type);
+				if(postponed.Count == remain.Count)
+				{
+					error(postponed);
+					return;
+				}
+				
+				if(postponed.Count == 0)
+				{
+					if(isWarn)
+						warning(sorted);
+					return;
+				}
+				
+				isWarn = true;
+				remain = postponed;
 			}
-			
-
 		}
-		
 		
 		public static List<T> LoadModules<T, A>(this IKernel kernel, Action<T> initialization, IEnumerable<Type> types)
 			where A: Attribute
