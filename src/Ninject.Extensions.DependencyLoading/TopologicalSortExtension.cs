@@ -32,7 +32,7 @@ namespace Ninject.Extensions.DependencyLoading
 			}
 			catch(CycleDetectException err)
 			{
-				throw err;
+				throw err; // clear stacktrace
 			}
 		}
 		

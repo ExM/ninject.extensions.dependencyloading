@@ -8,6 +8,24 @@ namespace Ninject.Extensions.DependencyLoading
 {
 	public static class ModuleLoaderExtensions
 	{
+		/// <summary>
+		/// loading modules with sorting of dependencies
+		/// </summary>
+		/// <param name="kernel">
+		/// super-factory <see cref="IKernel"/>
+		/// </param>
+		/// <param name="modules">
+		/// list of modules
+		/// </param>
+		/// <param name="initialization">
+		/// module initialization (should include the export of services)
+		/// </param>
+		/// <param name="warning">
+		/// returns a sorted list if the original list is not sorted
+		/// </param>
+		/// <param name="error">
+		/// returns a list of modules which can not be downloaded
+		/// </param>
 		public static void LoadModules<T>(this IKernel kernel, IEnumerable<Type> modules, Action<T> initialization,
 			Action<List<Type>> warning, Action<List<Type>> error)
 		{
@@ -51,13 +69,26 @@ namespace Ninject.Extensions.DependencyLoading
 				remain = postponed;
 			}
 		}
-		
+		/// <summary>
+		/// sorting module dependencies without loading
+		/// </summary>
 		public static List<Type> Sort<A>(this IEnumerable<Type> modules)
 			where A: Attribute
 		{
 			return modules.TopologicalSort(TypeDependencyDetector<A>.IsDependency, ShowType);
 		}
-		
+		/// <summary>
+		/// loading modules without sorting the dependencies
+		/// </summary>
+		/// <param name="kernel">
+		/// super-factory
+		/// </param>
+		/// <param name="modules">
+		/// list of modules 
+		/// </param>
+		/// <param name="initialization">
+		/// module initialization (should include the export of services)
+		/// </param>
 		public static void LoadModules<T>(this IKernel kernel, IEnumerable<Type> modules, Action<T> initialization)
 		{
 			foreach(Type type in modules)
@@ -66,7 +97,6 @@ namespace Ninject.Extensions.DependencyLoading
 				initialization(module);
 			}
 		}
-		
 		/// <summary>
 		/// imports all the properties of the module marked with an attribute of type A
 		/// </summary>
@@ -86,7 +116,7 @@ namespace Ninject.Extensions.DependencyLoading
 			}
 		}
 		
-		public static string ShowType(Type type)
+		private static string ShowType(Type type)
 		{
 			return string.Format("{0} in assembly {1}", type.FullName, type.Assembly.FullName);
 		}

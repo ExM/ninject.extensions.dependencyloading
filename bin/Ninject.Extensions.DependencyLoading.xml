@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>/home/exm/Projects/ninject.extensions.dependencyloading/bin/Ninject.Extensions.DependencyLoading</name>
+    </assembly>
+    <members>
+        <member name="T:Ninject.Extensions.DependencyLoading.CycleDetectException">
+            <summary>
+            Cycle detect
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.DependencyLoading.CycleDetectException.#ctor(System.String,System.String)">
+            <summary>
+            Cycle detect
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.DependencyLoading.ModuleLoaderExtensions.LoadModules``1(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Type},System.Action{``0},System.Action{System.Collections.Generic.List{System.Type}},System.Action{System.Collections.Generic.List{System.Type}})">
+            <summary>
+            loading modules with sorting of dependencies
+            </summary>
+            <param name="kernel">
+            super-factory <see cref="T:Ninject.IKernel" /></param>
+            <param name="modules">
+            list of modules
+            </param>
+            <param name="initialization">
+            module initialization (should include the export of services)
+            </param>
+            <param name="warning">
+            returns a sorted list if the original list is not sorted
+            </param>
+            <param name="error">
+            returns a list of modules which can not be downloaded
+            </param>
+        </member>
+        <member name="M:Ninject.Extensions.DependencyLoading.ModuleLoaderExtensions.Sort``1(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            sorting module dependencies without loading
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.DependencyLoading.ModuleLoaderExtensions.LoadModules``1(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Type},System.Action{``0})">
+            <summary>
+            loading modules without sorting the dependencies
+            </summary>
+            <param name="kernel">
+            super-factory
+            </param>
+            <param name="modules">
+            list of modules
+            </param>
+            <param name="initialization">
+            module initialization (should include the export of services)
+            </param>
+        </member>
+        <member name="M:Ninject.Extensions.DependencyLoading.ModuleLoaderExtensions.ImportServices``1(Ninject.IKernel,System.Object)">
+            <summary>
+            imports all the properties of the module marked with an attribute of type A
+            </summary>
+        </member>
+    </members>
+</doc>
