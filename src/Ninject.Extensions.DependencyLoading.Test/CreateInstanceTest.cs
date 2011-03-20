@@ -57,6 +57,85 @@ namespace DependencyLoadingTest
 		}
 		
 		[Test]
+		public void ManyWarning()
+		{
+			List<Type> modules = new List<Type>{
+				typeof(MG),
+				typeof(MF),
+				typeof(ME),
+				typeof(MD),
+				typeof(MC),
+				typeof(MB),
+				typeof(MA)};
+			
+			List<Type> warning = null;
+			IKernel kernel = new StandardKernel();
+			kernel.LoadModules<ITestModule>(modules, (module) =>
+			{
+				module.Initialize();
+				kernel.ImportServices<TestExportAttribute>(module);
+			},
+			(list) => {warning = list;}, (list) => {});
+			
+			Assert.IsNotNull(warning);
+			
+			Assert.AreEqual(typeof(MG), warning[6]);
+		}
+		
+		[Test]
+		public void ManyErrorOne()
+		{
+			List<Type> modules = new List<Type>{
+				typeof(MG),
+				typeof(ME),
+				typeof(MD),
+				typeof(MC),
+				typeof(MB),
+				typeof(MA)};
+			
+			List<Type> error = null;
+			IKernel kernel = new StandardKernel();
+			kernel.LoadModules<ITestModule>(modules, (module) =>
+			{
+				module.Initialize();
+				kernel.ImportServices<TestExportAttribute>(module);
+			},
+			(list) => {}, (list) => {error = list;});
+			
+			Assert.IsNotNull(error);
+			Assert.AreEqual(1, error.Count);
+			Assert.AreEqual(typeof(MG), error[0]);
+		}
+		
+		[Test]
+		public void ManyError3()
+		{
+			List<Type> modules = new List<Type>{
+				typeof(MG),
+				typeof(MF),
+				typeof(ME),
+				typeof(MC),
+				typeof(MB),
+				typeof(MA)};
+			
+			List<Type> error = null;
+			IKernel kernel = new StandardKernel();
+			kernel.LoadModules<ITestModule>(modules, (module) =>
+			{
+				module.Initialize();
+				kernel.ImportServices<TestExportAttribute>(module);
+			},
+			(list) => {}, (list) => {error = list;});
+			
+			Assert.IsNotNull(error);
+			Assert.AreEqual(4, error.Count);
+			Assert.IsTrue(error.Contains(typeof(MG)));
+			Assert.IsTrue(error.Contains(typeof(MF)));
+			Assert.IsTrue(error.Contains(typeof(ME)));
+			Assert.IsTrue(error.Contains(typeof(MB)));
+		}
+		
+		[Test]
 		public void ExportService()
 		{
 			IKernel kernel = new StandardKernel();

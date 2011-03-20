@@ -8,16 +8,16 @@ namespace Ninject.Extensions.DependencyLoading
 {
 	public static class ModuleLoaderExtensions
 	{
-		public static void LoadModules<T>(this IKernel kernel, IEnumerable<Type> modules,
-			Action<T> initialization, Action<List<Type>> warning, Action<List<Type>> error)
+		public static void LoadModules<T>(this IKernel kernel, IEnumerable<Type> modules, Action<T> initialization,
+			Action<List<Type>> warning, Action<List<Type>> error)
 		{
 			List<Type> sorted = new List<Type>();
 			List<Type> remain = modules.ToList();
-			List<Type> postponed = new List<Type>();
 			
 			bool isWarn = false;
 			while(true)
 			{
+				List<Type> postponed = new List<Type>();
 				foreach(Type type in remain)
 				{
 					object instance = (T)kernel.TryGet(type);
@@ -66,6 +66,7 @@ namespace Ninject.Extensions.DependencyLoading
 				initialization(module);
 			}
 		}
+		
 		/// <summary>
 		/// imports all the properties of the module marked with an attribute of type A
 		/// </summary>
